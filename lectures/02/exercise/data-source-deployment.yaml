@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sensor-data-source
+spec:
+  serviceName: sensor-data-source
+  replicas: 6
+  selector:
+    matchLabels:
+      app: sensor-data-source
+  template:
+    metadata:
+      labels:
+        app: sensor-data-source
+    spec:
+      containers:
+        - name: sensor-data-source
+          image: <your-registry>/sensor-data-source:latest
+          args: ["--interval", "1.0"]
